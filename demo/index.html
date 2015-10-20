@@ -10,7 +10,20 @@
 
 <body>
 <div class="app-body">
-    <ng-view> </ng-view>
+    <div style="width: 30%;float: left;">
+        <ul style="list-style: none">
+            <li><a href="#/">home</a></li>
+            <li><a href="#/controllerdemo">controllerdemo</a></li>
+            <li><a href="#/bindingdemo">bindingdemo</a></li>
+            <li><a href="#/filterdemo">filterdemo</a></li>
+            <li><a href="#directivedemo">directive</a></li>
+        </ul>
+    </div>
+    <div style="width: 70%;float: left;">
+        <ng-view></ng-view>
+    </div>
+
+
 </div>
 
 <!-- ~ .app -->
@@ -20,6 +33,9 @@
 <script src="../node_modules/angular-route/angular-route.js"></script>
 <script src="./scripts/index.js"></script>
 <script src="./scripts/controllers/controllerdemo.js"></script>
+<script src="./scripts/controllers/bindingdemo.js"></script>
+<script src="./scripts/controllers/filterdemo.js"></script>
+<script src="./scripts/directive/hellodirective.js"></script>
 </body>
 
 </html>
