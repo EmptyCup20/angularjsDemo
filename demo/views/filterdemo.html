@@ -1,0 +1,28 @@
+<div ng-controller="filterdemocontroller">
+    <input type="text" ng-model="num"/>
+    <p>currency usage :{{num | currency}}</p>
+    <p>currency usage :{{num*6 | currency : '￥' }}</p>
+    <p>date usage :{{ today | date : 'yyyy/MM/dd hh:mm:ss'}}</p>
+    <p>filter usage :</p>
+    Search: <input ng-model="searchText">
+    <table>
+        <tr><th>Name</th><th>Phone</th></tr>
+        <tr ng-repeat="search in searchs | filter:searchText">
+            <td>{{search.name}}</td>
+            <td>{{search.phone}}</td>
+        </tr>
+    </table>
+    <p>JOSN usage :{{{'name':'aaa','phone':'bbb'}|json}}</p>
+    <p>limitTo usage : {{searchs | limitTo:2}}</p>
+    <p>uppercase usage: {{text | uppercase}}</p>
+    <p>lowercase usage: {{text | lowercase}}</p>
+    <p>number usage: {{num|number:1}}</p>
+    <p>orderBy usage :</p>
+    <table>
+        <tr><th>name</th><th>phone</th></tr>
+        <tr ng-repeat="search in searchs">
+            <td>{{search.name}}</td>
+            <td>{{search.phone}}</td>
+        </tr>
+    </table>
+</div>
