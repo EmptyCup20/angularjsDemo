@@ -6,11 +6,15 @@ var myApp = angular.module('myApp', [
     'controllerDemo',
     'bindingdemo',
     'filterdemo',
-    'directivedemo'
+    'directivedemo',
+    'directivecontroll'
 ]);
 
-myApp.run(function($rootScope){
+myApp.run(function($rootScope,$timeout){
     $rootScope.name = "World";
+    $timeout(function(){
+        $rootScope.myHref = 'https://www.baidu.com';
+    },2000)
 });
 
 myApp.config(['$routeProvider', function($routeProvider) {

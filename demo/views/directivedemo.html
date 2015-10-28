@@ -1,4 +1,40 @@
+<!--简单的指令-->
 <hello></hello>
 <div hello></div>
 <!-- directive:hello -->
 <div class="hello"></div>
+
+<!--双向绑定&指令数据传递-->
+<br/>
+<label>outside url:</label>
+<input type="text" ng-model="outsideUrl" />
+<div data cus-url="outsideUrl" text="click me to go to {{outsideurl}}"></div>
+
+<!--内置指令-->
+<br/>
+<input ng-model="somedata" type="text" />
+<button ng-model="button" ng-disabled="!somedata">button</button>
+
+<!--href与ng-class区别-->
+<br/>
+<a href="{{myHref}}">normal href</a>
+<a ng-href="{{myHref}}">angular href</a>
+
+<!--ng-class用法-->
+<br/>
+<style>
+    .odd{background: #f1f1f1;width: 200px;}
+    .even{background: #bababa;width: 200px;}
+</style>
+<ul ng-controller="directivecontroller">
+    <li ng-repeat="person in people" ng-class="{odd:$odd,even:$even}">{{person.name}} live in {{person.city}}</li>
+</ul>
+
+<!--ng-change-->
+<br/>
+<div ng-controller="directivecontroller">
+    <input type="text" ng-change="change()" ng-model="eqution.x"/>
+    <code>{{eqution.output}}</code>
+</div>
+
+<!--指令参数-->

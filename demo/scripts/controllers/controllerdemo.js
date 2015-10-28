@@ -4,4 +4,4 @@
 var controllerDemoModule = angular.module('controllerDemo', [])
     .controller('controllerDemoController', function($scope){
         $scope.controllerName = "World";
-    })
+    });
