@@ -1,26 +1,26 @@
-<!--�򵥵�ָ��-->
-<hello url="https://www.baidu.com" url-text="�ٶ�һ��"></hello>
+<!--简单的指令-->
+<hello url="https://www.baidu.com" url-text="百度一下"></hello>
 <div hello></div>
 <!-- directive:hello -->
 <div class="hello"></div>
 
-<!--˫���&ָ�����ݴ���-->
+<!--双向绑定&指令数据传递-->
 <br/>
 <label>outside url:</label>
-<input type="text" ng-model="outsideUrl"/>
+<input type="text" ng-model="outsideUrl" placeholder="输入一个网址"/>
 <div data cus-url="outsideUrl" text="click me to go to {{outsideurl}}"></div>
 
-<!--����ָ��-->
+<!--内置指令-->
 <br/>
-<input ng-model="somedata" type="text"/>
+<input ng-model="somedata" type="text" placeholder="请输入"/>
 <button ng-model="button" ng-disabled="!somedata">button</button>
 
-<!--href��ng-class����-->
+<!--href与ng-class区别-->
 <br/>
 <a href="{{myHref}}">normal href</a>
 <a ng-href="{{myHref}}">angular href</a>
 
-<!--ng-class�÷�-->
+<!--ng-class用法-->
 <br/>
 <style>
     .odd {
@@ -40,11 +40,11 @@
 <!--ng-change-->
 <br/>
 <div ng-controller="directivecontroller">
-    <input type="text" ng-change="change()" ng-model="eqution.x"/>
+    <input type="text" ng-change="change()" ng-model="eqution.x" placeholder="输入一个数字"/>
     <code>{{eqution.output}}</code>
 </div>
-
-<!--ָ�����-->
+<br/>
+<!--指令参数-->
 <div ng-controller="scopeController">
     outside directivce:{{myData}}
     <div scopeusage my-data="set binging with @">
@@ -53,4 +53,38 @@
     <div scope>
         scope directive:{{myData}}
     </div>
+</div>
+<br/>
+<!--指令参数transclude-->
+<div ng-controller="ExampleController">
+    <input ng-model="title"> <br/>
+    <textarea ng-model="text"></textarea> <br/>
+    <pane title="{{title}}">{{text}}</pane>
+    <span pane title="{{title}}">{{text}}</span>
+</div>
+<br/>
+
+<div coll id="name">
+    <span ng-click="showParma()">在控制台中或点击可以看到指令中的controller函数的参数</span>
+</div>
+<br/>
+
+<!--demo-->
+<style>
+    .header{
+        background: #dddddd;
+        height: 20px;
+        width: 200px;
+        cursor: pointer;
+    }
+    .content{
+        border: 1px solid #000;
+        height: 150px;
+        width: 200px;
+    }
+</style>
+<div ng-controller="tabShowDemo">
+    <tabshow my-title="{{title}}">
+        {{content}}
+    </tabshow>
 </div>
