@@ -1,5 +1,5 @@
 <!--简单的指令-->
-<hello></hello>
+<hello url="https://www.baidu.com" url-text="百度一下"></hello>
 <div hello></div>
 <!-- directive:hello -->
 <div class="hello"></div>
@@ -7,12 +7,12 @@
 <!--双向绑定&指令数据传递-->
 <br/>
 <label>outside url:</label>
-<input type="text" ng-model="outsideUrl" />
+<input type="text" ng-model="outsideUrl"/>
 <div data cus-url="outsideUrl" text="click me to go to {{outsideurl}}"></div>
 
 <!--内置指令-->
 <br/>
-<input ng-model="somedata" type="text" />
+<input ng-model="somedata" type="text"/>
 <button ng-model="button" ng-disabled="!somedata">button</button>
 
 <!--href与ng-class区别-->
@@ -23,8 +23,15 @@
 <!--ng-class用法-->
 <br/>
 <style>
-    .odd{background: #f1f1f1;width: 200px;}
-    .even{background: #bababa;width: 200px;}
+    .odd {
+        background: #f1f1f1;
+        width: 200px;
+    }
+
+    .even {
+        background: #bababa;
+        width: 200px;
+    }
 </style>
 <ul ng-controller="directivecontroller">
     <li ng-repeat="person in people" ng-class="{odd:$odd,even:$even}">{{person.name}} live in {{person.city}}</li>
@@ -38,3 +45,12 @@
 </div>
 
 <!--指令参数-->
+<div ng-controller="scopeController">
+    outside directivce:{{myData}}
+    <div scopeusage my-data="set binging with @">
+        scopeusage directive:{{myData}}
+    </div>
+    <div scope>
+        scope directive:{{myData}}
+    </div>
+</div>
