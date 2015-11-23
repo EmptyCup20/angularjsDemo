@@ -3,11 +3,12 @@
  */
 var myApp = angular.module('myApp', [
     'ngRoute',
-    'controllerDemo',
+    'controllers',
     'bindingdemo',
     'filterdemo',
     'directivedemo',
-    'directivecontroll'
+    'directivecontroll',
+    'introduce'
 ]);
 
 myApp.run(function($rootScope,$timeout){
@@ -21,10 +22,14 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/HelloWorld.html'
     });
+    $routeProvider.when('/introduce', {
+        templateUrl: 'views/introduce.html',
+        controller: 'myCtrl'
+    });
 
-    $routeProvider.when('/controllerdemo', {
+    $routeProvider.when('/controllers', {
         templateUrl: 'views/controllerdemo.html',
-        controller: 'controllerDemoController'
+        controller: 'myCtrl'
     });
     $routeProvider.when('/bindingdemo',{
         templateUrl: 'views/bindingdemo.html',

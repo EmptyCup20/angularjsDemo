@@ -5,23 +5,69 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>我的车辆</title>
+    <link rel="stylesheet" href="../demo/styles/w3cschool.css" type="text/css" media="all">
+    <title>AngularJS 教程</title>
 </head>
 
 <body>
-<div class="app-body">
-    <div style="width: 30%;float: left;">
-        <ul style="list-style: none">
-            <li><a href="#/">home</a></li>
-            <li><a href="#/controllerdemo">controllerdemo</a></li>
-            <li><a href="#/bindingdemo">bindingdemo</a></li>
-            <li><a href="#/filterdemo">filterdemo</a></li>
-            <li><a href="#directivedemo">directive</a></li>
-        </ul>
-    </div>
-    <div style="width: 70%;float: left;">
-        <ng-view></ng-view>
+<div class="container main">
+    <!-- 中间 -->
+    <div class="row">
 
+        <div class="col left-column">
+            <div class="tab">AngularJS 教程</div>
+            <div class="sidebar-box gallery-list">
+                <div class="design" id="leftcolumn">
+                    <a target="_top" title="AngularJS 教程" href="#/">
+                        AngularJS 教程			</a>
+                    <a target="_top" title="AngularJS 简介" href="#/introduce">
+                        AngularJS 简介			</a>
+                    <a target="_top" title="AngularJS 表达式" href="#/expressions">
+                        AngularJS 表达式			</a>
+                    <a target="_top" title="AngularJS 指令" href="#/directives">
+                        AngularJS 指令			</a>
+                    <a target="_top" title="AngularJS 控制器" href="#/controllers">
+                        AngularJS 控制器			</a>
+                    <a target="_top" title="AngularJS 过滤器" href="#/filters">
+                        AngularJS 过滤器			</a>
+                    <a target="_top" title="AngularJS Http" href="#/http">
+                        AngularJS Http			</a>
+                    <a target="_top" title="AngularJS 表格" href="#/tables">
+                        AngularJS 表格
+                    </a>
+                    <a target="_top" title="AngularJS SQL" href="#/sql">
+                        AngularJS SQL
+                    </a>
+                    <a target="_top" title="AngularJS HTML DOM" href="#/html-dom">
+                    AngularJS HTML DOM			</a>
+                    <a target="_top" title="AngularJS 事件" href="#/html-events">
+                        AngularJS 事件			</a>
+                    <a target="_top" title="AngularJS 模块" href="#/modules">
+                        AngularJS 模块			</a>
+                    <a target="_top" title="AngularJS 表单" href="#/forms">
+                        AngularJS 表单
+                    </a>
+                    <a target="_top" title="AngularJS 输入验证" href="#/validation">
+                        AngularJS 输入验证
+                    </a>
+                    <a target="_top" title="AngularJS 包含" href="#/api">
+                        AngularJS API
+                    </a>
+                    <a target="_top" title="AngularJS Bootstrap" href="#/bootstrap">
+                        AngularJS Bootstrap
+                    </a>
+                    <a target="_top" title="AngularJS 包含" href="#/include">
+                        AngularJS 包含
+                    </a>
+                    <a target="_top" title="AngularJS 应用" href="#/application">
+                        AngularJS 应用
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col middle-column">
+            <ng-view></ng-view>
+        </div>
     </div>
 </div>
 
@@ -31,6 +77,7 @@
 <script src="../node_modules/angular/angular.js"></script>
 <script src="../node_modules/angular-route/angular-route.js"></script>
 <script src="./scripts/index.js"></script>
+<script src="./scripts/controllers/introduce.js"></script>
 <script src="./scripts/controllers/controllerdemo.js"></script>
 <script src="./scripts/controllers/bindingdemo.js"></script>
 <script src="./scripts/controllers/filterdemo.js"></script>
