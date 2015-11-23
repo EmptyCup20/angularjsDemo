@@ -1,0 +1,153 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+
+        <h1>AngularJS <span class="color_h1">表格</span></h1>
+
+        <hr>
+        <p class="intro">
+            ng-repeat 指令可以完美的显示表格。
+        </p>
+
+        <hr>
+        <h2>在表格中显示数据</h2>
+        <p>使用 angular 显示表格是非常简单的：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"customersCtrl"</span><span class="highGT">&gt;</span> <br><br><span class="highLT">&lt;</span><span class="highELE">table</span><span class="highGT">&gt;</span><br>
+                &nbsp; <span class="highLT">&lt;</span><span class="highELE">tr</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Name } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Country } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/tr</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/table</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp', []);<br>app.controller('customersCtrl',
+                function($scope, $http) {<br>&nbsp;&nbsp;&nbsp; $http.get("data/Customers_JSON.php")<br>
+                &nbsp;&nbsp;&nbsp;
+                .success(function (response) {$scope.names = response;});<br>});<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span></div>
+            <br><div ng-controller="customersCtrl">
+
+            <table>
+                <tr ng-repeat="x in names">
+                    <td>{{ x.Name }}</td>
+                    <td>{{ x.Country }}</td>
+                </tr>
+            </table>
+
+        </div>
+        <hr>
+        <h2>使用 CSS 样式</h2>
+        <p>为了让页面更加美观，我们可以在页面中使用CSS：</p>
+        <div class="example">
+            <h2 class="example">CSS 样式</h2>
+            <div class="example_code">
+                <span class="highELE">&lt;style&gt;<br>table, th , td </span>{<br>&nbsp; <span class="highATT">border:</span><span class="highVAL"> 1px solid grey;</span><br>&nbsp;
+                <span class="highATT">border-collapse:</span><span class="highVAL"> collapse;</span><br>&nbsp; <span class="highATT">padding:</span><span class="highVAL"> 5px;</span><br>}<br><span class="highELE">table tr:nth-child(odd) </span>{<br>&nbsp;
+                <span class="highATT">background-color:</span><span class="highVAL"> #f1f1f1;</span><br>}<br><span class="highELE">table tr:nth-child(even) </span>{<br>&nbsp;
+                <span class="highATT">background-color:</span><span class="highVAL"> #ffffff;</span><br>}<br><span class="highELE">&lt;/style&gt;
+</span></div>
+            <br>
+            <style>
+                .css table, th , td {
+                    border: 1px solid grey;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+                .css table tr:nth-child(odd) {
+                    background-color: #f1f1f1;
+                }
+                .css table tr:nth-child(even) {
+                    background-color: #ffffff;
+                }
+            </style>
+            <div class="css">
+                <div ng-controller="customersCtrl">
+                    <table>
+                        <tr ng-repeat="x in names">
+                            <td>{{ x.Name }}</td>
+                            <td>{{ x.Country }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <h2>使用 orderBy 过滤器</h2>
+        <p>排序显示，可以使用 <strong>orderBy</strong> 过滤器:&nbsp; </p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">table</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">tr</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names | orderBy : 'Country'"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Name } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Country } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">/tr</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/table</span><span class="highGT">&gt;</span>
+            </div>
+            <br><table ng-controller="customersCtrl">
+            <tr ng-repeat="x in names">
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Country | uppercase }}</td>
+            </tr>
+        </table>
+        </div>
+        <hr>
+        <h2>使用 uppercase 过滤器</h2>
+        <p>使用 <strong>uppercase</strong> 过滤器转换为大写:&nbsp; </p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">table</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">tr</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Name } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Country
+| uppercase } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">/tr</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/table</span><span class="highGT">&gt;</span>
+            </div>
+            <br><table ng-controller="customersCtrl">
+            <tr ng-repeat="x in names">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Country }}</td>
+            </tr>
+        </table>
+        </div>
+
+        <hr>
+        <h2>显示序号 ($index)</h2>
+        <p>表格显示序号可以在 &lt;td&gt; 中添加 <strong>$index</strong>:&nbsp; </p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">table</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">tr</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { $index + 1 } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Name } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">td</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Country } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">/tr</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/table</span><span class="highGT">&gt;</span>
+            </div>
+            <br>
+            <table ng-controller="customersCtrl">
+                <tr ng-repeat="x in names">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ x.Name }}</td>
+                    <td>{{ x.Country }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+        <h2>使用 $even 和 $odd</h2>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">table</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">tr</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">td</span> <span class="highATT">ng-if=</span><span class="highVAL">"$odd"</span>
+                <span class="highATT">style=</span><span class="highVAL">"background-color:#f1f1f1"</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Name }}</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">td</span> <span class="highATT">ng-if=</span><span class="highVAL">"$even"</span><span class="highGT">&gt;</span><span class="highATT">{ {
+ x.Name } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">td</span> <span class="highATT">ng-if=</span><span class="highVAL">"$odd"</span> <span class="highATT">style=</span><span class="highVAL">"background-color:#f1f1f1"</span><span class="highGT">&gt;</span><span class="highATT">{ {
+ x.Country } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">td</span> <span class="highATT">ng-if=</span><span class="highVAL">"$even"</span><span class="highGT">&gt;</span><span class="highATT">{ { x.Country } }</span><span class="highLT">&lt;</span><span class="highELE">/td</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/tr</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">/table</span><span class="highGT">&gt;</span>
+            </div>
+            <br>
+            <table ng-controller="customersCtrl">
+                <tr ng-repeat="x in names">
+                    <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Name }}</td>
+                    <td ng-if="$even">{{ x.Name }}</td>
+                    <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Country }}</td>
+                    <td ng-if="$even">{{ x.Country }}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

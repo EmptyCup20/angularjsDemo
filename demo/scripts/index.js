@@ -4,44 +4,74 @@
 var myApp = angular.module('myApp', [
     'ngRoute',
     'controllers',
-    'bindingdemo',
-    'filterdemo',
-    'directivedemo',
-    'directivecontroll',
-    'introduce'
+    'introduce',
+    'expressions',
+    'directives',
+    'filters',
+    'http',
+    'htmlEvents',
+    'myEx',
+    'validation',
+    'api',
+    'myNoteApp'
 ]);
 
-myApp.run(function($rootScope,$timeout){
-    $rootScope.name = "World";
-    $timeout(function(){
-        $rootScope.myHref = 'https://www.baidu.com';
-    },2000)
-});
 
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: 'views/HelloWorld.html'
+        templateUrl: 'views/tutorial.html'
     });
     $routeProvider.when('/introduce', {
-        templateUrl: 'views/introduce.html',
-        controller: 'myCtrl'
+        templateUrl: 'views/introduce.html'
     });
-
+    $routeProvider.when('/expressions',{
+        templateUrl: 'views/expressions.html'
+    });
     $routeProvider.when('/controllers', {
-        templateUrl: 'views/controllerdemo.html',
-        controller: 'myCtrl'
+        templateUrl: 'views/controller.html'
     });
-    $routeProvider.when('/bindingdemo',{
-        templateUrl: 'views/bindingdemo.html',
-        controller: 'bindingdemocontroller'
+    $routeProvider.when('/filters', {
+        templateUrl: 'views/filters.html'
     });
-    $routeProvider.when('/filterdemo',{
-        templateUrl: 'views/filterdemo.html',
-        controller: 'filterdemocontroller'
+    $routeProvider.when('/directives', {
+        templateUrl: 'views/directives.html'
     });
-    $routeProvider.when('/directivedemo',{
-        templateUrl: 'views/directivedemo.html'
-    })
+    $routeProvider.when('/http', {
+        templateUrl: 'views/http.html'
+    });
+    $routeProvider.when('/tables', {
+        templateUrl: 'views/tables.html'
+    });
+    $routeProvider.when('/sql', {
+        templateUrl: 'views/sql.html'
+    });
+    $routeProvider.when('/htmlDom', {
+        templateUrl: 'views/htmlDom.html'
+    });
+    $routeProvider.when('/htmlEvents', {
+        templateUrl: 'views/htmlEvents.html'
+    });
+    $routeProvider.when('/modules', {
+        templateUrl: 'views/modules.html'
+    });
+    $routeProvider.when('/forms', {
+        templateUrl: 'views/forms.html'
+    });
+    $routeProvider.when('/validation', {
+        templateUrl: 'views/validation.html'
+    });
+    $routeProvider.when('/api', {
+        templateUrl: 'views/api.html'
+    });
+    $routeProvider.when('/bootstrap', {
+        templateUrl: 'views/bootstrap.html'
+    });
+    $routeProvider.when('/include', {
+        templateUrl: 'views/include.html'
+    });
+    $routeProvider.when('/application', {
+        templateUrl: 'views/application.html'
+    });
 }]);
 
 

@@ -1,0 +1,110 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">输入验证</span></h1>
+
+        <hr>
+        <p class="intro">AngularJS 表单和控件可以验证输入的数据。</p>
+
+        <hr>
+        <h2>输入验证</h2>
+        <p>在前面的几个章节中，你已经学到关于 AngularJS 表单和控件的知识。</p>
+        <p>AngularJS 表单和控件可以提供验证功能，并对用户输入的非法数据进行警告。</p>
+        <p>
+        </p>
+        <table class="lamp"><tbody><tr>
+            <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+            <td>客户端的验证不能确保用户输入数据的安全，所以服务端的数据验证也是必须的。</td>
+        </tr></tbody></table>
+
+        <hr>
+        <h2>应用代码</h2>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">!DOCTYPE</span> <span class="highATT">html</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">html</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">body</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">h2</span><span class="highGT">&gt;</span>Validation Example<span class="highLT">&lt;</span><span class="highELE">/h2</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">form&nbsp;</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span><span class="highATT">&nbsp;
+	ng-controller=</span><span class="highVAL">"validateCtrl"</span><span class="highATT"><br>name=</span><span class="highVAL">"myForm"</span> <span class="highATT">novalidate</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>用户名:<span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">name=</span><span class="highVAL">"user"</span> <span class="highATT">ng-model=</span><span class="highVAL">"user"</span>
+                <span class="highATT">required</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">style=</span><span class="highVAL">"color:red"</span> <span class="highATT">ng-show=</span><span class="highVAL">"myForm.user.$dirty &amp;&amp;
+	myForm.user.$invalid"</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">ng-show=</span><span class="highVAL">"myForm.user.$error.required"</span><span class="highGT">&gt;</span>用户名是必须的。<span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>邮箱:<span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"email"</span> <span class="highATT">name=</span><span class="highVAL">"email"</span> <span class="highATT">ng-model=</span><span class="highVAL">"email"</span> <span class="highATT">required</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">span</span>
+                <span class="highATT">style=</span><span class="highVAL">"color:red"</span> <span class="highATT">ng-show=</span><span class="highVAL">"myForm.email.$dirty &amp;&amp; myForm.email.$invalid"</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">ng-show=</span><span class="highVAL">"myForm.email.$error.required"</span><span class="highGT">&gt;</span>邮箱是必须的。<span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">ng-show=</span><span class="highVAL">"myForm.email.$error.email"</span><span class="highGT">&gt;</span>非法的邮箱。<span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"submit"</span><span class="highATT"><br>&nbsp;
+	ng-disabled=</span><span class="highVAL">"myForm.user.$dirty &amp;&amp; myForm.user.$invalid ||<br>&nbsp; 
+	myForm.email.$dirty &amp;&amp; myForm.email.$invalid"</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/form</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var validation = angular.module('validation', []);<br>validation.controller('validateCtrl',
+                function($scope) {<br>&nbsp;&nbsp;&nbsp;
+                $scope.user = 'John Doe';<br>&nbsp;&nbsp;&nbsp; $scope.email = 'john.doe@gmail.com';<br>
+                });<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/body</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/html</span><span class="highGT">&gt;</span>
+            </div>
+            <br><form ng-controller="validateCtrl"
+                      name="myForm" novalidate>
+
+            <p>用户名:<br>
+                <input type="text" name="user" ng-model="user" required>
+<span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+<span ng-show="myForm.user.$error.required">用户名是必须的。</span>
+</span>
+            </p>
+
+            <p>邮箱:<br>
+                <input type="email" name="email" ng-model="email" required>
+<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+<span ng-show="myForm.email.$error.required">邮箱是必须的。</span>
+<span ng-show="myForm.email.$error.email">非法的邮箱地址。</span>
+</span>
+            </p>
+
+            <p>
+                <input type="submit"
+                       ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||
+myForm.email.$dirty && myForm.email.$invalid">
+            </p>
+
+        </form>
+        </div>
+        <br>
+        <table class="lamp"><tbody><tr>
+            <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+            <td> HTML 表单属性 <strong>novalidate</strong> 用于禁用浏览器默认的验证。</td>
+        </tr></tbody></table>
+
+        <hr>
+        <h2>实例解析</h2>
+        <p>
+            AngularJS  <strong>ng-model</strong> 指令用于绑定输入元素到模型中。</p>
+        <p>
+        </p><p>
+        模型对象有两个属性： <strong>user</strong> 和 <strong>email</strong>。</p>
+        <p>
+            我们使用了 <strong>ng-show</strong>指令， color:red 在邮件是 <strong>$dirty</strong> 或 <strong>$invalid</strong> 才显示。</p>
+        <table class="reference">
+            <tbody><tr>
+                <th>属性</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>$dirty</td>
+                <td>表单有填写记录</td>
+            </tr>
+            <tr>
+                <td>$valid</td>
+                <td>字段内容合法的</td>
+            </tr>
+            <tr>
+                <td>$invalid</td>
+                <td>字段内容是非法的</td>
+            </tr>
+            <tr>
+                <td>$pristine</td>
+                <td>表单没有填写记录</td>
+            </tr>
+            </tbody></table>
+
+
+    </div>
+</div>

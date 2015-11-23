@@ -1,0 +1,126 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">Filters</span></h1>
+
+        <hr>
+        <p class="intro">过滤器可以使用一个管道字符（|）添加到表达式和指令中。</p>
+
+        <hr>
+        <h2>AngularJS 过滤器
+        </h2>
+        <p>AngularJS 过滤器可用于转换数据：</p>
+
+        <table class="reference"> <tbody><tr> <th style="width:20%">过滤器</th> <th>描述</th> </tr> <tr> <td>currency</td> <td>格式化数字为货币格式。</td> </tr> <tr> <td>filter</td> <td>从数组项中选择一个子集。</td> </tr> <tr> <td>lowercase</td> <td>格式化字符串为小写。</td> </tr> <tr> <td>orderBy</td> <td>根据某个表达式排列数组。</td> </tr> <tr> <td>uppercase</td> <td>格式化字符串为大写。</td> </tr> </tbody></table>
+
+        <hr>
+        <h2>表达式中添加过滤器</h2>
+        <p>过滤器可以通过一个管道字符（|）和一个过滤器添加到表达式中。.</p>
+        <p>(（下面的两个实例，我们将使用前面章节中提到的 person 控制器）)</p>
+
+        <p> <strong>uppercase</strong> 过滤器将字符串格式化为大写：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"personCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>姓名为 <span class="highATT">{ { lastName | uppercase } }</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span>
+            </div>
+            <br>
+            <div ng-controller="personCtrl">
+
+                <p>姓名为 {{ lastName | uppercase }}</p>
+
+            </div>
+        </div>
+
+        <p><strong>lowercase</strong> 过滤器将字符串格式化为小写：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"personCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>姓名为 <span class="highATT">{ { lastName | lowercase } }</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span>
+            </div>
+            <br>
+            <div  ng-controller="personCtrl">
+
+                <p>姓名为 {{ lastName | lowercase }}</p>
+
+            </div>
+        </div>
+        <hr>
+        <h2>currency 过滤器</h2>
+        <p><strong>currency</strong> 过滤器将数字格式化为货币格式：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"costCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"number"</span> <span class="highATT">ng-model=</span><span class="highVAL">"quantity"</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"number"</span> <span class="highATT">ng-model=</span><span class="highVAL">"price"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>总价 = <span class="highATT">{ { (quantity * price) | currency } }</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="costCtrl">
+
+            <input type="number" ng-model="quantity">
+            <input type="number" ng-model="price">
+
+            <p>总价 = {{ (quantity * price) | currency }}</p>
+
+        </div>
+        </div>
+
+        <hr>
+        <h2>向指令添加过滤器</h2>
+        <p>过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中。</p>
+        <p><strong>orderBy</strong> 过滤器根据表达式排列数组：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"namesCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">ul</span><span class="highGT">&gt;</span><br>
+                &nbsp; <span class="highLT">&lt;</span><span class="highELE">li</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names | orderBy:'country'"</span><span class="highGT">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp; <span class="highATT">{ { x.name + ', ' + x.country } }</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/li</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/ul</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">div</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="namesCtrl">
+
+            <ul>
+                <li ng-repeat="x in names | orderBy:'country'">
+                    {{ x.name + ', ' + x.country }}
+                </li>
+            </ul>
+
+            <div>
+        </div>
+
+        <hr>
+        <h2>过滤输入</h2>
+        <p>输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称。</p>
+        <p><strong>filter</strong> 过滤器从数组中选择一个子集：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"namesCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"test"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">ul</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">li</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names |
+<span class="</span><span class='highATT'>marked">filter:test</span> | orderBy:'country'"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highATT">{ { (x.name | uppercase) + ', ' + x.country } }</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/li</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/ul</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span>
+            </div>
+            <br>
+            <div ng-controller="namesCtrl">
+
+                <p><input type="text" ng-model="test"></p>
+
+                <ul>
+                    <li ng-repeat="x in names | filter:test | orderBy:'country'">
+                        {{ (x.name | uppercase) + ', ' + x.country }}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>

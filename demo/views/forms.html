@@ -1,0 +1,87 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">表单</span></h1>
+        <script src="http://apps.bdimg.com/libs/angular.js/1.3.9/angular.min.js"></script>
+        <hr>
+        <p class="intro">AngularJS 表单是输入控件的集合。</p>
+
+        <hr>
+
+        <h2>HTML 控件</h2>
+        <p>以下 HTML input 元素被称为 HTML 控件:</p>
+        <ul>
+            <li>input 元素</li>
+            <li>select 元素</li>
+            <li>button 元素</li>
+            <li>textarea 元素</li>
+        </ul>
+        <h2>HTML 表单</h2>
+        <p>HTML 表单通常与 HTML 控件同时存在。</p>
+
+        <hr>
+        <h2>应用程序代码</h2>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"formCtrl"</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">form</span>
+                <span class="highATT">novalidate</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; First Name:<span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"user.firstName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; Last
+                Name:<span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"user.lastName"</span><span class="highGT">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"reset()"</span><span class="highGT">&gt;</span>RESET<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>&nbsp;
+                <span class="highLT">&lt;</span><span class="highELE">/form</span><span class="highGT">&gt;</span><br>
+                &nbsp; <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>form = <span class="highATT">{{<span style="display:none">{</span>user}}</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br>
+                &nbsp; <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>master = <span class="highATT">{{<span style="display:none">{</span>master}}</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>
+                var forms =
+                angular.module('myEx', []);<br>forms.controller('ExampleController',
+                function($scope) {<br>
+                &nbsp;&nbsp;&nbsp; $scope.master = {firstName: "John", lastName: "Doe"};<br>
+                &nbsp;&nbsp;&nbsp; $scope.reset = function() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.user
+                = angular.copy($scope.master);<br>&nbsp;&nbsp;&nbsp; };<br>&nbsp;&nbsp;&nbsp;
+                $scope.reset();<br>});<br>
+                <span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="ExampleController">
+            <form novalidate>
+                First Name:<br>
+                <input type="text" ng-model="user.firstName"><br>
+                Last Name:<br>
+                <input type="text" ng-model="user.lastName">
+                <br><br>
+                <button ng-click="reset()">RESET</button>
+            </form>
+            <p>form = {{user}}</p>
+            <p>master = {{master}}</p>
+        </div>
+        </div>
+
+        <table class="lamp"><tbody><tr>
+            <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+            <td><strong>novalidate</strong> 属性是在 HTML5 中新增的。禁用了使用浏览器的默认验证。</td>
+        </tr></tbody></table>
+
+        <hr>
+        <h2>实例解析</h2>
+        <p>
+            <strong>ng-app</strong> 指令定义了 AngularJS 应用。</p>
+        <p>
+            <strong>ng-controller</strong> 指令定义了应用控制器。</p>
+        <p>
+            <strong>ng-model</strong> 指令绑定了两个 input 元素到模型的 <strong>
+            user</strong> 对象。</p>
+        <p>
+            <strong>formCtrl</strong> 函数设置了
+            <strong>master</strong> 对象的初始值，并定义了 <strong>reset()</strong> 方法。</p>
+        <p>
+            <strong>reset()</strong> 方法设置了 <strong>user</strong>
+            对象等于 <strong>master</strong> 对象。 </p>
+
+        <p>
+            <strong>ng-click</strong> 指令调用了 <strong>reset()</strong>
+            方法，且在点击按钮时调用。</p>
+        <p>
+            novalidate 属性在应用中不是必须的，但是你需要在 AngularJS 表单中使用，用于重写标准的 HTML5 验证。</p>
+
+    </div>
+</div>

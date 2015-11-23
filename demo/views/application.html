@@ -1,0 +1,119 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">应用</span></h1>
+
+        <hr>
+        <p class="intro">现在是时候创建一个真正的 AngularJS 单页 Web 应用（single page web application，SPA）了。</p>
+
+        <hr>
+        <h2>AngularJS 应用实例</h2>
+        <p>您已经学习了足够多关于 AngularJS 的知识，现在可以开始创建您的第一个 AngularJS 应用程序：</p>
+
+        <div ng-controller="myNoteCtrl" style="width:400px;border:1px solid black;padding:10px;background-color:yellow" class="ng-scope">
+            <h2>我的笔记</h2>
+            <textarea ng-model="message" cols="40" rows="10" class="ng-valid ng-dirty ng-touched"></textarea>
+            <br><br>
+            <button ng-click="save()">保存</button>
+            <button ng-click="clear()">清除</button>
+            <p>
+                剩余字数: <b><span ng-bind="left()" class="ng-binding">100</span></b>
+            </p>
+        </div>
+        <br>
+        <hr>
+        <h2>应用程序讲解</h2>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">html</span> <span class="highATT">ng-app=</span><span class="highVAL">"myNoteApp"</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"http://apps.bdimg.com/libs/angular.js/1.3.9/angular.min.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">body</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-controller=</span><span class="highVAL">"myNoteCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">h2</span><span class="highGT">&gt;</span>我的笔记<span class="highLT">&lt;</span><span class="highELE">/h2</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">textarea</span> <span class="highATT">ng-model=</span><span class="highVAL">"message"</span> <span class="highATT">cols=</span><span class="highVAL">"40"</span> <span class="highATT">rows=</span><span class="highVAL">"10"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/textarea</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"save()"</span><span class="highGT">&gt;</span>保存<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"clear()"</span><span class="highGT">&gt;</span>清除<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span>Number of characters left: <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">ng-bind=</span><span class="highVAL">"left()"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"myNoteApp.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"myNoteCtrl.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">/body</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">/html</span><span class="highGT">&gt;</span></div>
+        </div>
+        <p>控制器文件 "application.js":</p>
+        <div class="example">
+            <div class="example_code">
+                var app = angular.module("myNoteApp", []);<br/>
+                app.controller("myNoteCtrl", function($scope) {<br>
+                &nbsp;&nbsp;&nbsp; $scope.message
+                = "";<br>&nbsp;&nbsp;&nbsp; $scope.left&nbsp; = function() {return 100 -
+                $scope.message.length;};<br>&nbsp;&nbsp;&nbsp; $scope.clear = function()
+                {$scope.message = "";};<br>
+                &nbsp;&nbsp;&nbsp; $scope.save&nbsp; = function() {alert("Note Saved");};<br>
+                });
+            </div>
+        </div>
+        <p> &lt;html&gt; 元素是 AngularJS 应用: ng-app="<strong>myNoteApp</strong>" 的容器:</p>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">html</span> <span class="highATT">ng-app=</span><span class="highVAL">"myNoteApp"</span><span class="highGT">&gt;</span>
+            </div>
+        </div>
+
+        <p>&lt;div&gt; 是 HTML 页面中控制器: ng-controller="<strong>myNoteCtrl</strong>" 的作用域:</p>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-controller=</span><span class="highVAL">"myNoteCtrl"</span><span class="highGT">&gt;</span>
+            </div>
+        </div>
+
+        <p> <strong>ng-model</strong> 指令绑定了 &lt;textarea&gt; 到控制器变量 <strong>
+            message</strong>:</p>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">textarea</span> <span class="highATT">ng-model=</span><span class="highVAL">"message"</span> <span class="highATT">cols=</span><span class="highVAL">"40"</span> <span class="highATT">rows=</span><span class="highVAL">"10"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/textarea</span><span class="highGT">&gt;</span></div>
+        </div>
+
+        <p>两个 <strong>ng-click</strong> 事件调用了控制器函数 <strong>clear()</strong>
+            和 <strong>save()</strong>:</p>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"save()"</span><span class="highGT">&gt;</span>Save<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"clear()"</span><span class="highGT">&gt;</span>Clear<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span>
+            </div>
+        </div>
+
+        <p> <strong>ng-bind</strong> 指令绑定控制器函数 <strong>left()</strong> 到&lt;span&gt; ，用于显示剩余字符:</p>
+        <div class="example">
+            <div class="example_code">
+                Number of characters left: <span class="highLT">&lt;</span><span class="highELE">span</span> <span class="highATT">ng-bind=</span><span class="highVAL">"left()"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/span</span><span class="highGT">&gt;</span>
+            </div>
+        </div>
+
+        <p>应用库文件需要在 AngularJs 加载后才能执行：</p>
+        <div class="example">
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"application.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
+            </div>
+        </div>
+        <hr><h2>AngularJS 应用架构</h2>
+        <p>以上实例是一个完整的 AngularJS 单页Web应用（single page web application，SPA）。</p>
+        <p>&lt;html&gt; 元素包含了 AngularJS 应用 (<strong>ng-app=</strong>)。</p>
+        <p>&lt;div&gt; 元素定义了 AngularJS 控制器的作用域
+            (<strong>ng-controller=</strong>)。</p>
+        <p>在一个应用可以由很多控制器。</p>
+        <p>应用文件(<strong>my...App.js</strong>) 定义了应用模型代码。</p>
+        <p>一个或多个控制器文件 (<strong>my...Ctrl.js</strong>) 定义了控制器代码。</p>
+        <hr>
+
+        <h2>总结 - 它是如何工作的呢？</h2>
+        <p>ng-app 指令位于应用的根元素下。</p>
+        <p>对于单页Web应用（single page web application，SPA），应用的根通常为
+            &lt;html&gt; 元素。</p>
+        <p>一个或多个 ng-controller 指令定义了应用的控制器。每个控制器有他自己的作用域：: 定义的 HTML 元素。</p>
+        <p>AngularJS 在 HTML DOMContentLoaded 事件中自动开始。如果找到
+            ng-app 指令 ， AngularJS 载入指令中的模块，并将 ng-app 作为应用的根进行编译。 </p>
+        <p>应用的根可以是整个页面，或者页面的一小部分，如果是一小部分会更快编译和执行。</p>
+
+
+    </div>
+</div>

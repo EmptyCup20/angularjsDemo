@@ -18,48 +18,48 @@
             <div class="tab">AngularJS 教程</div>
             <div class="sidebar-box gallery-list">
                 <div class="design" id="leftcolumn">
-                    <a target="_top" title="AngularJS 教程" href="#/">
+                    <a target="_top" id="tutorial" title="AngularJS 教程" href="#/" class="active">
                         AngularJS 教程			</a>
-                    <a target="_top" title="AngularJS 简介" href="#/introduce">
+                    <a target="_top" id="introduce" title="AngularJS 简介" href="#/introduce">
                         AngularJS 简介			</a>
-                    <a target="_top" title="AngularJS 表达式" href="#/expressions">
+                    <a target="_top" id="expressions" title="AngularJS 表达式" href="#/expressions">
                         AngularJS 表达式			</a>
-                    <a target="_top" title="AngularJS 指令" href="#/directives">
+                    <a target="_top" id="directives" title="AngularJS 指令" href="#/directives">
                         AngularJS 指令			</a>
-                    <a target="_top" title="AngularJS 控制器" href="#/controllers">
+                    <a target="_top" id="controllers" title="AngularJS 控制器" href="#/controllers">
                         AngularJS 控制器			</a>
-                    <a target="_top" title="AngularJS 过滤器" href="#/filters">
+                    <a target="_top" id="filters" title="AngularJS 过滤器" href="#/filters">
                         AngularJS 过滤器			</a>
-                    <a target="_top" title="AngularJS Http" href="#/http">
+                    <a target="_top" id="http" title="AngularJS Http" href="#/http">
                         AngularJS Http			</a>
-                    <a target="_top" title="AngularJS 表格" href="#/tables">
+                    <a target="_top" id="tables" title="AngularJS 表格" href="#/tables">
                         AngularJS 表格
                     </a>
-                    <a target="_top" title="AngularJS SQL" href="#/sql">
+                    <a target="_top" id="sql" title="AngularJS SQL" href="#/sql">
                         AngularJS SQL
                     </a>
-                    <a target="_top" title="AngularJS HTML DOM" href="#/html-dom">
+                    <a target="_top" id="htmlDom" title="AngularJS HTML DOM" href="#/htmlDom">
                     AngularJS HTML DOM			</a>
-                    <a target="_top" title="AngularJS 事件" href="#/html-events">
+                    <a target="_top" id="htmlEvents" title="AngularJS 事件" href="#/htmlEvents">
                         AngularJS 事件			</a>
-                    <a target="_top" title="AngularJS 模块" href="#/modules">
+                    <a target="_top" id="modules" title="AngularJS 模块" href="#/modules">
                         AngularJS 模块			</a>
-                    <a target="_top" title="AngularJS 表单" href="#/forms">
+                    <a target="_top" id="forms" title="AngularJS 表单" href="#/forms">
                         AngularJS 表单
                     </a>
-                    <a target="_top" title="AngularJS 输入验证" href="#/validation">
+                    <a target="_top" id="validation" title="AngularJS 输入验证" href="#/validation">
                         AngularJS 输入验证
                     </a>
-                    <a target="_top" title="AngularJS 包含" href="#/api">
+                    <a target="_top" id="api" title="AngularJS 包含" href="#/api">
                         AngularJS API
                     </a>
-                    <a target="_top" title="AngularJS Bootstrap" href="#/bootstrap">
+                    <a target="_top" id="bootstrap" title="AngularJS Bootstrap" href="#/bootstrap">
                         AngularJS Bootstrap
                     </a>
-                    <a target="_top" title="AngularJS 包含" href="#/include">
+                    <a target="_top" id="include" title="AngularJS 包含" href="#/include">
                         AngularJS 包含
                     </a>
-                    <a target="_top" title="AngularJS 应用" href="#/application">
+                    <a target="_top" id="application" title="AngularJS 应用" href="#/application">
                         AngularJS 应用
                     </a>
                 </div>
@@ -77,10 +77,27 @@
 <script src="../node_modules/angular/angular.js"></script>
 <script src="../node_modules/angular-route/angular-route.js"></script>
 <script src="./scripts/index.js"></script>
+<script src="./scripts/jquery-1.9.1.min.js"></script>
 <script src="./scripts/controllers/introduce.js"></script>
-<script src="./scripts/controllers/controllerdemo.js"></script>
-<script src="./scripts/controllers/bindingdemo.js"></script>
-<script src="./scripts/controllers/filterdemo.js"></script>
+<script src="./scripts/controllers/controller.js"></script>
+<script src="./scripts/controllers/expressions.js"></script>
+<script src="./scripts/controllers/filters.js"></script>
+<script src="./scripts/controllers/forms.js"></script>
+<script src="./scripts/controllers/application.js"></script>
+<script src="./scripts/controllers/validation.js"></script>
+<script src="./scripts/controllers/htmlEvents.js"></script>
+<script src="./scripts/controllers/api.js"></script>
+<script src="./scripts/controllers/http.js"></script>
 <script src="./scripts/directive/hellodirective.js"></script>
+<script src="./scripts/directive/directives.js"></script>
+<script>
+    $('.design a').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+    var path = window.location.href.split('#/');
+    if (path[1] !== ''){
+        $('.design').find('#'+path[1]).addClass('active').siblings().removeClass('active');
+    }
+</script>
 </body>
 </html>

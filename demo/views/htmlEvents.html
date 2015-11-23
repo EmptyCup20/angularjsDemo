@@ -1,0 +1,105 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">事件</span></h1>
+
+        <hr>
+        <p class="intro">AngularJS 有自己的 HTML 事件指令。</p>
+        <hr>
+        <h2>ng-click 指令</h2>
+        <p><strong>ng-click</strong>
+            指令定义了 AngularJS 点击事件。 </p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">""</span> <span class="highATT">ng-controller=</span><span class="highVAL">"myCtrl"</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"count
+= count + 1"</span><span class="highGT">&gt;</span>点我！<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">p</span><span class="highGT">&gt;</span><span class="highATT">{ { count } }</span><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span></div>
+            <br><div ng-controller="myCtrl">
+
+            <button ng-click="count = count + 1">点我！</button>
+
+            <p>{{ count }}</p>
+
+        </div>
+        </div>
+        <hr>
+        <h2>隐藏 HTML 元素</h2>
+        <p><strong>ng-hide</strong> 指令用于设置应用部分是否可见。 </p>
+        <p><strong>ng-hide="true"</strong> 设置 HTML 元素不可见。</p>
+        <p><strong>ng-hide="false"</strong> 设置 HTML 元素可见。</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"personCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"toggle()"</span><span class="highGT">&gt;</span>&gt;隐藏/显示<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">p</span> <span class="highATT">ng-hide=</span><span class="highVAL">"myVar"</span><span class="highGT">&gt;</span><br>
+                名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"firstName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
+                姓名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"lastName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>Full Name:
+                <span class="highATT">{ {firstName + " " + lastName} }</span><br><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp', []);<br>app.controller('personCtrl',
+                function($scope) {<br>&nbsp;&nbsp;&nbsp; $scope.firstName
+                = "John",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;$scope.lastName = "Doe"<br>&nbsp;&nbsp;&nbsp; $scope.myVar
+                = false;<br>&nbsp;&nbsp;&nbsp; $scope.toggle = function() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                $scope.myVar = !$scope.myVar;<br>&nbsp;&nbsp;&nbsp; };<br>});<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="personCtrl_1">
+
+            <button ng-click="toggle()">隐藏/显示</button>
+
+            <p ng-hide="myVar">
+                名: <input type="text" ng-model="firstName"><br>
+                姓名: <input type="text" ng-model="lastName"><br>
+                <br>
+                Full Name: {{firstName + " " + lastName}}
+            </p>
+
+        </div>
+        </div>
+        <p>应用解析:</p>
+        <p>第一部分 <strong>personController</strong>与控制器章节类似。</p>
+        <p>应用有一个默认属性: <strong>$scope.myVar
+            = false;</strong></p>
+        <p><strong>ng-hide</strong> 指令设置 &lt;p&gt;元素及两个输入域是否可见， 根据 <strong>myVar</strong> 的值 (true 或 false) 来设置是否可见。 </p>
+        <p><strong>toggle()</strong> 函数用于切换 <strong>myVar</strong> 变量的值（true 和 false）。</p>
+        <p> <strong>ng-hide="true"</strong> 让元素 <strong>不可见</strong>。</p>
+        <hr>
+        <h2>显示 HTML 元素</h2>
+        <p> <strong>ng-show</strong> 指令可用于设置应用中的一部分是否<strong>可见</strong> 。</p>
+        <p> <strong>ng-show="false"</strong> 可以设置 HTML 元素
+            <strong>不可见</strong>。</p>
+        <p><strong>ng-show="true"</strong> 可以以设置 HTML 元素可见。</p>
+        <p>以下实例使用了 ng-show 指令:</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"personCtrl"</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">button</span> <span class="highATT">ng-click=</span><span class="highVAL">"toggle()"</span><span class="highGT">&gt;</span>隐藏/显示<span class="highLT">&lt;</span><span class="highELE">/button</span><span class="highGT">&gt;</span><br>
+                <br><span class="highLT">&lt;</span><span class="highELE">p</span> <span class="highATT">ng-show=</span><span class="highVAL">"myVar"</span><span class="highGT">&gt;</span><br>
+                名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"firstName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
+                姓: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"lastName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>姓名:
+                <span class="highATT">{ {firstName + " " + lastName} }</span><br><span class="highLT">&lt;</span><span class="highELE">/p</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br>
+                <span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp', []);<br>app.controller('personCtrl',
+                function($scope) {<br>&nbsp;&nbsp;&nbsp; $scope.firstName
+                = "John",<br>&nbsp;&nbsp;&nbsp;&nbsp;$scope.lastName = "Doe"<br>&nbsp;&nbsp;&nbsp; $scope.myVar
+                = true;<br>&nbsp;&nbsp;&nbsp; $scope.toggle = function() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                $scope.myVar = !$scope.myVar;<br>&nbsp;&nbsp;&nbsp; }<br>});<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="personCtrl_2">
+
+            <button ng-click="toggle()">隐藏/显示</button>
+
+            <p ng-show="myVar">
+                名: <input type="text" ng-model="firstName"><br>
+                姓: <input type="text" ng-model="lastName"><br>
+                <br>
+                姓名: {{firstName + " " + lastName}}
+            </p>
+
+        </div>
+        </div>
+
+    </div>
+</div>
