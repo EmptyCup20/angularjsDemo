@@ -25,11 +25,15 @@
                     <a target="_top" id="expressions" title="AngularJS 表达式" href="#/expressions">
                         AngularJS 表达式			</a>
                     <a target="_top" id="directives" title="AngularJS 指令" href="#/directives">
-                        AngularJS 指令			</a>
+                        AngularJS 内置指令			</a>
+                    <a target="_top" id="diydirective" title="AngularJS 指令" href="#/diydirective">
+                        AngularJS 自定义指令			</a>
                     <a target="_top" id="controllers" title="AngularJS 控制器" href="#/controllers">
                         AngularJS 控制器			</a>
                     <a target="_top" id="filters" title="AngularJS 过滤器" href="#/filters">
                         AngularJS 过滤器			</a>
+                    <a target="_top" id="route" title="AngularJS 路由" href="#/route">
+                        AngularJS 路由			</a>
                     <a target="_top" id="http" title="AngularJS Http" href="#/http">
                         AngularJS Http			</a>
                     <a target="_top" id="tables" title="AngularJS 表格" href="#/tables">
@@ -76,20 +80,21 @@
 <div ui-yield-to="modals"></div>
 <script src="../node_modules/angular/angular.js"></script>
 <script src="../node_modules/angular-route/angular-route.js"></script>
-<script src="./scripts/index.js"></script>
-<script src="./scripts/jquery-1.9.1.min.js"></script>
-<script src="./scripts/controllers/introduce.js"></script>
-<script src="./scripts/controllers/controller.js"></script>
-<script src="./scripts/controllers/expressions.js"></script>
-<script src="./scripts/controllers/filters.js"></script>
-<script src="./scripts/controllers/forms.js"></script>
-<script src="./scripts/controllers/application.js"></script>
-<script src="./scripts/controllers/validation.js"></script>
-<script src="./scripts/controllers/htmlEvents.js"></script>
-<script src="./scripts/controllers/api.js"></script>
-<script src="./scripts/controllers/http.js"></script>
-<script src="./scripts/directive/hellodirective.js"></script>
-<script src="./scripts/directive/directives.js"></script>
+<script src="scripts/index.js"></script>
+<script src="scripts/jquery-1.9.1.min.js"></script>
+<script src="scripts/controllers/introduce.js"></script>
+<script src="scripts/controllers/controller.js"></script>
+<script src="scripts/controllers/expressions.js"></script>
+<script src="scripts/controllers/filters.js"></script>
+<script src="scripts/controllers/forms.js"></script>
+<script src="scripts/controllers/application.js"></script>
+<script src="scripts/controllers/validation.js"></script>
+<script src="scripts/controllers/htmlEvents.js"></script>
+<script src="scripts/controllers/api.js"></script>
+<script src="scripts/controllers/http.js"></script>
+<script src="scripts/directive/hellodirective.js"></script>
+<script src="scripts/directive/directives.js"></script>
+<script src="scripts/directive/diydirective.js"></script>
 <script>
     $('.design a').click(function(){
         $(this).addClass('active').siblings().removeClass('active');

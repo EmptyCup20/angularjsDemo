@@ -1,0 +1,276 @@
+<div class="article-body">
+    <div class="article-intro" id="content">
+        <h1>AngularJS <span class="color_h1">自定义指令</span>
+        </h1>
+        <hr>
+        <p class="intro">AngularJS 应用的模块中有很多方法可以使用，其中 <strong>directive()</strong> 这个方法是用来定义指令的</p>
+        <hr>
+        <p>directive()方法可以接受两个参数。</p>
+        <p><strong>name</strong>：字符串</p>
+        <p><strong>factory_function</strong>：函数</p>
+        <p><strong>directive</strong>的工厂函数会行会一个定义了指令的全部行为。$compile服务利用这个方法返回的对象，在DOM调用指令时来构造指令的行为。
+            <br>当<strong>AngularJS</strong>启动应用时，它会把第一个参数当做一个字符串，并以此字符串未名来注册第二个参数返回的对象。AngularJS编译器会解析主HTML的DOM中的元素、属性、注释和CSS类名中使用了这个名字的地方，并在这些地方引用对应的指令。当它找到某个已知的指令时，就会在页面中插入指令所对应的DOM元素。</p>
+        <div class="example">
+            <h2 class="example">AngularJS 指令定义</h2>
+            <div class="example_code notranslate htmlHigh">
+                <pre>
+    angular.module('myApp',[])
+    .directive('myDirective',function(){
+    //指令定义放在这里
+        return{
+            //通过设置项来定义指令，没在这里进行覆写
+        }
+    });</pre>
+            </div>
+        </div>
+        <p>
+        </p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        为了避免与未来的HTML标准冲突，给自定义的指令加入前缀来代表自定义的命名空间。AngularJS本身已经使用了ng-前缀，所以可以选择除此以外的名字。在例子中我们使用my-前缀（比如my-derictive）
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>指令参数</h2>
+        <p>下面，来看看定义一个指令时可以使用的全部设置选项。</p>
+        <div class="example">
+            <h2 class="example">指令具体参数</h2>
+            <div class="example_code notranslate htmlHigh">
+                <pre>
+directive('',function(){
+Runs during compile
+return {
+    priority: 1,
+    terminal: true,
+    template: '',
+    restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+    scope: {}, // {} = isolate, true = child, false/undefined = no change
+    templateUrl: '',
+    replace: true,
+    transclude: true,
+    controller: function($scope, $element, $attrs, $transclude) {},
+    require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+    compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+    link: function($scope, iElm, iAttrs, controller) {}
+};
+});</pre>
+            </div>
+        </div>
+        <hr>
+        <h2>priority 参数</h2>
+        <p><strong>priority</strong> 参数定义了该指令的优先级，默认值为<strong>0</strong>。</p>
+        <p>大多数指令会忽略这个参数，但也有些场景设置改优先级是非常重要的甚至是必须的。例如，ngRepeat将这个参数设置为1000，这样可以保证在同一元素上他，它总是在其他指令之前被调用。如果一个元素上具有两个优先级相同的指令，声明在前面的那个会被优先调用。如果其中一个的优先级更高，则不管声明的顺序如何都会被优先调用：具有更高优先级的指令总是优先运行。</p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        ngRepeat是所有内置指令中优先级最高的，它总是在其他指令之前运行。这样设置主要考虑的是性能。
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>terminal 参数</h2>
+        <p><strong>terminal</strong> 参数用来告诉AngularJS停止运行当前元素上比本指令优先级低的指令。但同当前指令优先级相同的指令还是会被执行。</p>
+        <p>如果元素上某个指令设置了terminal参数并具有较高的优先级，就不要再用其他低优先级的指令对其进行修饰了，因为不会被调用。但是具有相同优先级的指令还是会被继续调用。</p>
+        <p>使用了terminal参数的例子是ngView和ngIf。ngIf的优先级略高于ngView，如果ngIf的表达式值为true，ngView就可以被正常执行，但如果ngIf表达式的值为false，由于ngView的优先级较低就不会被执行。</p>
+        <hr>
+        <h2>restrict 参数</h2>
+        <p><strong>restrict</strong> 是一个可选的参数。它告诉AngularJS这个指令在DOM中可以何种形式被声明。默认AngularJS认为restrict的值是A，即以属性的形式来进行声明。</p>
+        <pre>
+    E(元素)
+    &lt;my-directive&gt; &lt;/my-directive&gt;    
+    A(属性，默认值)
+    &lt;div my-directive&gt;&lt;/div&gt;
+    C(类名)
+    &lt;div class="my-directive"&gt;&lt;/div&gt;
+    M(注释)
+    &lt;!-- directive:my-directive --&gt;
+</pre>
+        <p>属性是用来声明指令最常用的方式，因为它能在包括老版本的IE浏览器在内的所有浏览器中正常工作，并且不需要在文档头部注册新的标签。</p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        尽量避免用注释方式来声明属性。这种方式最初被用来声明由多个标签组成的指令。
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>template 参数</h2>
+        <p><strong>template</strong> 参数一般是一段html字符串</p>
+        <p>还有一种参数形式是：接受两个参数的函数，参数为tElement和tAttrs，并返回一个代表模板的字符串。</p>
+        <hr>
+        <h2>templateUrl 参数</h2>
+        <p><strong>templateUrl</strong> 参数一般一个代表外部HTML文件路径的字符串</p>
+        <p>还有一种参数形式是：接受两个参数的函数，参数为tElement和tAttrs，并返回一个外部HTML文件路径的字符串。</p>
+        <hr>
+        <h2>replace 参数</h2>
+        <p><strong>replace</strong>是一个可选参数，如果设置了这个参数，值必须为true，因为默认值为false。默认值意味着模板会被当作子元素插入到调用此指令的元素内部</p>
+        <pre>
+&lt;div some-directive&gt;&lt;/div&gt;
+.directive('someDirective', function() {
+    return {
+        template: '&lt;div&gt;some stuff here&lt;div&gt;'
+        };
+});
+调用指令之后
+&lt;div some-directive&gt;
+&lt;div&gt;some stuff here&lt;div&gt;
+&lt;/div&gt;
+</pre>
+        <p>replace为true时</p>
+        <pre>
+.directive('someDirective', function() {
+return {
+    replace: true // 修饰过
+        template: '&lt;div&gt;some stuff here&lt;div&gt;'
+    };
+});
+调用指令之后
+&lt;div&gt;some stuff here&lt;div&gt;
+</pre>
+<hr>
+<h2>transclude 参数</h2>
+<p><strong>transclude</strong>是一个可选的参数。如果设置了，其值必须为<strong>true</strong>，它的默认值是<strong>false</strong>。</p>
+<p>移动一个标识符的原始字节带你到一个新模版的位置<a href="http://docs.angularjs.cn/api/ng/directive/ngTransclude">更详细transclude</a></p>
+<pre>
+&lt;span myDirective&gt;content&lt;/span&gt;
+.directive('myDirective',function(){
+    return {
+        transclude:'true',
+        template:'&lt;div&gt;原来的内容在这里
+            +'&lt;span ng-transclude&gt;&lt;/span&gt;'
+        +&lt;/div&gt;'
+    }
+});
+执行之后
+&lt;div&gt;原来的内容在这里
+&lt;span&gt;content&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <h2>重复 HTML 元素</h2>
+        <p><strong>ng-repeat</strong> 指令会重复一个 HTML 元素：</p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code notranslate htmlHigh">
+                &lt;div ng-app="" ng-init="names=['Jani','Hege','Kai']"&gt;
+                <br> &nbsp; &lt;p&gt;使用 ng-repeat 来循环数组&lt;/p&gt;
+                <br> &nbsp; &lt;ul&gt;
+                <br> &nbsp;&nbsp;&nbsp; &lt;li ng-repeat="x in names"&gt;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ x }}
+                <br> &nbsp;&nbsp;&nbsp; &lt;/li&gt;
+                <br> &nbsp; &lt;/ul&gt;
+                <br> &lt;div&gt;
+                <br>
+            </div>
+            <br>
+            <div ng-init="names=['Jani','Hege','Kai']">
+                <p>使用 ng-repeat 来循环数组</p>
+                <ul>
+                    <li ng-repeat="x in names">
+                        {{ x }}
+                    </li>
+                </ul>
+            </div>
+            <p><strong>ng-repeat</strong> 指令用在一个对象数组上：</p>
+            <div class="example">
+                <h2 class="example">AngularJS 实例</h2>
+                <div class="example_code notranslate htmlHigh">
+                    &lt;div ng-app="" ng-init="names=[
+                    <br> {name:'Jani',country:'Norway'},
+                    <br> {name:'Hege',country:'Sweden'},
+                    <br> {name:'Kai',country:'Denmark'}]"&gt;
+                    <br>
+                    <br>&lt;p&gt;循环对象：&lt;/p&gt;
+                    <br>&lt;ul&gt;
+                    <br> &nbsp; &lt;li ng-repeat="x in names"&gt;
+                    <br> &nbsp;&nbsp;&nbsp; {{ x.name + ', ' + x.country }}
+                    <br>&nbsp; &lt;/li&gt;
+                    <br> &lt;/ul&gt;
+                    <br>
+                    <br>&lt;/div&gt;
+                </div>
+                <br>
+                <div ng-init="names=[
+                                        {name:'Jani',country:'Norway'},
+                                        {name:'Hege',country:'Sweden'},
+                                        {name:'Kai',country:'Denmark'}]">
+                    <p>循环对象：</p>
+                    <ul>
+                        <li ng-repeat="x    in names">
+                            {{ x.name + ', ' + x.country }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p>
+        </p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+                    <td>AngularJS 完美支持数据库的 CRUD（增加Create、读取Read、更新Update、删除Delete）应用程序。
+                        <br> 把实例中的对象想象成数据库中的记录。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>ng-app 指令</h2>
+        <p><strong>ng-app</strong> 指令定义了 AngularJS 应用程序的 <strong>根元素</strong>。</p>
+        <p><strong>ng-app</strong> 指令在网页加载完毕时会<strong>自动引导</strong>（自动初始化）应用程序。 </p>
+        <p>稍后您将学习到 <strong>ng-app</strong> 如何通过一个值（比如 ng-app="myModule"）连接到代码模块。</p>
+        <hr>
+        <h2>ng-init 指令</h2>
+        <p><strong>ng-init</strong> 指令为 AngularJS 应用程序定义了 <strong>初始值</strong>。</p>
+        <p>通常情况下，不使用 ng-init。您将使用一个控制器或模块来代替它。</p>
+        <p>稍后您将学习更多有关控制器和模块的知识。</p>
+        <hr>
+        <h2>ng-model 指令</h2>
+        <p><strong>ng-model</strong> 指令 <strong>绑定 HTML 元素</strong> 到应用程序数据。</p>
+        <p><strong>ng-model</strong> 指令也可以：</p>
+        <ul>
+            <li>为应用程序数据提供类型验证（number、email、required）。</li>
+            <li>为应用程序数据提供状态（invalid、dirty、touched、error）。</li>
+            <li>为 HTML 元素提供 CSS 类。</li>
+            <li>绑定 HTML 元素到 HTML 表单。</li>
+        </ul>
+        <hr>
+        <h2>ng-repeat 指令</h2>
+        <p><strong>ng-repeat</strong> 指令对于集合中（数组中）的每个项会 <strong>克隆一次 HTML 元素</strong>。</p>
+        <br>
+        <br>
+    </div>
+</div>

@@ -36,6 +36,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/directives', {
         templateUrl: 'views/directives.html'
     });
+    $routeProvider.when('/diydirective', {
+        templateUrl: 'views/diydirective.html'
+    });
     $routeProvider.when('/http', {
         templateUrl: 'views/http.html'
     });
