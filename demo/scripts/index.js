@@ -6,7 +6,7 @@ var myApp = angular.module('myApp', [
     'controllers',
     'introduce',
     'expressions',
-    'directives',
+    'directivesCtrl',
     'filters',
     'http',
     'htmlEvents',
@@ -14,7 +14,9 @@ var myApp = angular.module('myApp', [
     'validation',
     'api',
     'myNoteApp'
-]);
+]).run(function($rootScope) {
+    $rootScope.name = "World";
+});
 
 
 myApp.config(['$routeProvider', function($routeProvider) {
@@ -24,11 +26,14 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/introduce', {
         templateUrl: 'views/introduce.html'
     });
-    $routeProvider.when('/expressions',{
+    $routeProvider.when('/expressions', {
         templateUrl: 'views/expressions.html'
     });
     $routeProvider.when('/controllers', {
         templateUrl: 'views/controller.html'
+    });
+    $routeProvider.when('/scope', {
+        templateUrl: 'views/scope.html'
     });
     $routeProvider.when('/filters', {
         templateUrl: 'views/filters.html'
@@ -76,5 +81,3 @@ myApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/application.html'
     });
 }]);
-
-
