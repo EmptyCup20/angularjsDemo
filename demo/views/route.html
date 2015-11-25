@@ -1,0 +1,103 @@
+<div class="article-body">
+    <div class="article-intro" id="content">
+        <h1>AngularJS <span class="color_h1">路由</span></h1>
+        <hr>
+        <p class="intro">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们会将这些模板分解到视图中，并在布局模板内进行组装。AngularJS允许我们在$route服务的提供者$routeProvider中通过声明路由来实现这个功能。
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过$routeProvider，可以发挥出浏览器历史导航的优势，并让用户基于浏览器当前的URL地址创建书签或分享页面。
+        </p>
+        <pre>&lt;script src="../node_modules/angular-route/angular-route.js"&gt;&lt;/script&gt;</pre>
+        <hr>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+                    <td>
+                        从1.2版本开始，AngularJS将ngRoutes从核心代码中剥离出来成为独立的模块。我们需要安装并引用它，才能够在AngularJS应用中正常地使用路由功能。</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>布局模板</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要创建一个布局模板，需要修改HTML以告诉AngularJS把模板渲染到何处。通过将ng-view指令和路由组合到一起，我们可以精确地指定当前路由所对应的模板在DOM中的渲染位置。例如，布局模板看起来可能是下面这样的：</p>
+        <pre>
+&lt;header&gt;
+    &lt;h1&gt;Header&lt;/h1&gt;
+&lt;/header&gt;
+&lt;div class="content"&gt;
+    &lt;div ng-view&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;footer&gt;
+    &lt;h5&gt;Footer&lt;/h5&gt;
+&lt;/footer&gt;</pre>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个例子中，我们将所有需要渲染的内容都放到了&lt;div class="content"&gt;中，而&lt;header&gt;和&lt;footer&gt;中的内容在路由改变时不会有任何变化。ng-view是由ngRoute模块提供的一个特殊指令，它的独特作用是在HTML中给$route对应的视图内容占位。它会创建自己的作用域并将模板嵌套在内部。</p>
+        <h4>ngView指令遵循以下规则。</h4>
+        <ul>
+            <li>每次触发$routeChangeSuccess事件，视图都会更新。</li>
+            <li>如果某个模板同当前的路由相关联：</li>
+            <li style="background-image:none;">
+                <ul>
+                    <li>创建一个新的作用域；</li>
+                    <li>移除上一个视图，同时上一个作用域也会被清除；</li>
+                    <li>将新的作用域同当前模板关联在一起；</li>
+                    <li>如果路由中有相关的定义，那么就把对应的控制器同当前作用域关联起来；</li>
+                    <li>触发$viewContentLoaded事件；</li>
+                    <li>如果提供了onload属性，调用该属性所指定的函数。</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>路由</h2>
+        <p>我们可以使用AngularJS提供的when和otherwise两个方法来定义应用的路由。
+            <br>用config函数在特定的模块或应用中定义路由。</p>
+        <pre>
+angular.module('myApp', []).
+    config(['$routeProvider', function($routeProvider) {
+    // 在这里定义路由
+}]);</pre>
+        <p>现在，我们可以用when方法来添加一个特定的路由。这个方法可以接受两个参数<strong>（when(path,route)）</strong>。</p>
+        <pre>
+angular.module('myApp', []).
+    config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+    .when('/', {
+    templateUrl: 'views/home.html',
+    controller: 'HomeController'
+    });
+}]);
+</pre>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数是路由路径，这个路径会与<strong>$location.path</strong>进行匹配，<strong>$location.path</strong>也就是当前URL的路径。如果路径后面还有其他内容，或使用了双斜线也可以正常匹配。我们可以在URL中存储参数，参数需要以冒号开头（例如:<strong>name</strong>），后面会讨论如何用<strong>$routeParams</strong>读取这些参数。
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数是配置对象，决定了当第一个参数中的路由能够匹配时具体做些什么。配置对象中可以进行设置的属性包括<strong>controller、template、templateURL、resolve、redirectTo</strong>和<strong>reloadOnSearch</strong>。
+        </p>
+        <h2>controller  参数</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果配置对象中设置了controller属性，那么这个指定的控制器会与路由所创建的新作用域关联在一起。如果参数值是字符型，会在模块中所有注册过的控制器中查找对应的内容，然后与路由关联在一起。如果参数值是函数型，这个函数会作为模板中DOM元素的控制器并与模板进行关联。</p>
+        <h2>redirectTo 参数</h2>
+        <pre>
+redirectTo: '/home'
+// 或者
+redirectTo: function(route,path,search)</pre>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果redirectTo属性的值是一个字符串，那么路径会被替换成这个值，并根据这个目标路径触发路由变化。如果redirectTo属性的值是一个函数，那么路径会被替换成函数的返回值，并根据这个目标路径触发路由变化。如果redirectTo属性的值是一个函数，AngularJS会在调用它时传入下面三个参数中：
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) 从当前路径中提取出的路由参数；
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2) 当前路径；
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3) 当前URL中的查询串。</p>
+        <h2>$routeParams</h2>
+        <p>前面提到如果我们在路由参数的前面加上<strong>:</strong>，AngularJS就会把它解析出来并传递给<strong>$routeParams</strong>。例如，如果我们设置下面这样的路由：</p>
+        <pre>
+$routeProvider
+    .when('/inbox/:name', {
+    controller: 'InboxController',
+    templateUrl: 'views/inbox.html'
+});
+</pre>
+        <p>
+            AngularJS会在$routeParams中添加一个名为name的键，它的值会被设置为加载进来的URL中的值。如果浏览器加载/inbox/all这个URL，那么$routeParams对象看起来会是下面这样：
+        </p>
+        <pre>{ name: 'all' }</pre>
+        <p>需要注意，如果想要在控制器中访问这些变量，需要把$routeParams注入进控制器：</p>
+        <pre>
+app.controller('InboxController', function($scope,$routeParams) {
+// 在这里访问$routeParams
+});</pre>
+        <h4>基于angular的路由所封装的ui-angular的<a href="https://github.com/angular-ui/ui-router">ui-route</a>也是一个比较好用的路由控制</h4>
+    </div>
+</div>

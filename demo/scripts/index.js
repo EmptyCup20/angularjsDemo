@@ -14,70 +14,75 @@ var myApp = angular.module('myApp', [
     'validation',
     'api',
     'myNoteApp'
-]).run(function($rootScope) {
+]).run(function ($rootScope) {
     $rootScope.name = "World";
 });
 
 
-myApp.config(['$routeProvider', function($routeProvider) {
+myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/tutorial.html'
-    });
-    $routeProvider.when('/introduce', {
+    })
+    .when('/introduce', {
         templateUrl: 'views/introduce.html'
-    });
-    $routeProvider.when('/expressions', {
+    })
+    .when('/expressions', {
         templateUrl: 'views/expressions.html'
-    });
-    $routeProvider.when('/controllers', {
+    })
+    .when('/controllers', {
         templateUrl: 'views/controller.html'
-    });
-    $routeProvider.when('/scope', {
+    })
+    .when('/scope', {
         templateUrl: 'views/scope.html'
-    });
-    $routeProvider.when('/filters', {
+    })
+    .when('/route', {
+        templateUrl: 'views/route.html',
+        controller: 'routeCtrl'
+    })
+    .when('/filters', {
         templateUrl: 'views/filters.html'
-    });
-    $routeProvider.when('/directives', {
+    })
+    .when('/directives', {
         templateUrl: 'views/directives.html'
-    });
-    $routeProvider.when('/diydirective', {
+    })
+    .when('/diydirective', {
         templateUrl: 'views/diydirective.html'
-    });
-    $routeProvider.when('/http', {
+    })
+    .when('/http', {
         templateUrl: 'views/http.html'
-    });
-    $routeProvider.when('/tables', {
+    })
+    .when('/tables', {
         templateUrl: 'views/tables.html'
-    });
-    $routeProvider.when('/sql', {
+    })
+    .when('/sql', {
         templateUrl: 'views/sql.html'
-    });
-    $routeProvider.when('/htmlDom', {
+    })
+    .when('/htmlDom', {
         templateUrl: 'views/htmlDom.html'
-    });
-    $routeProvider.when('/htmlEvents', {
+    })
+    .when('/htmlEvents', {
         templateUrl: 'views/htmlEvents.html'
-    });
-    $routeProvider.when('/modules', {
+    })
+    .when('/modules', {
         templateUrl: 'views/modules.html'
-    });
-    $routeProvider.when('/forms', {
+    })
+    .when('/forms', {
         templateUrl: 'views/forms.html'
-    });
-    $routeProvider.when('/validation', {
+    })
+    .when('/validation', {
         templateUrl: 'views/validation.html'
-    });
-    $routeProvider.when('/api', {
+    })
+    .when('/api', {
         templateUrl: 'views/api.html'
-    });
-    $routeProvider.when('/bootstrap', {
+    })
+    .when('/bootstrap', {
         templateUrl: 'views/bootstrap.html'
-    });
-    $routeProvider.when('/include', {
+    })
+    .when('/include', {
         templateUrl: 'views/include.html'
-    });
-    $routeProvider.when('/application', {
+    })
+    .when('/application', {
         templateUrl: 'views/application.html'
     });
+    //.otherwise({redirectTo: '/'});
 }]);
