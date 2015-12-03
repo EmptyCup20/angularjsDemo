@@ -19,14 +19,4 @@ var controllerDemoModule = angular.module('controllers', [])
             {name:'Hege',country:'Sweden'},
             {name:'Kai',country:'Denmark'}
         ];
-    })
-    .controller('routeCtrl',function($scope,$routeParams,$location){
-        console.log($routeParams);
-        console.log($location.path());
-        console.log($location.hash());
-        console.log($location.host());
-        console.log($location.port());
-        console.log($location.protocol());
-        console.log($location.search());
-        console.log($location.url());
     });

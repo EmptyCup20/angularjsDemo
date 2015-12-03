@@ -20,10 +20,10 @@ var myApp = angular.module('myApp', [
 
 
 myApp.config(['$routeProvider', function ($routeProvider) {
+    // $routeProvider.when('/', {
+    //     templateUrl: 'views/tutorial.html'
+    // })
     $routeProvider.when('/', {
-        templateUrl: 'views/tutorial.html'
-    })
-    .when('/introduce', {
         templateUrl: 'views/introduce.html'
     })
     .when('/expressions', {
