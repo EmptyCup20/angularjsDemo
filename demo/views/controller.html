@@ -20,7 +20,7 @@
                 <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"myCtrl"</span><span class="highGT">&gt;</span><br>
                 <br>名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"firstName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
                 名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"lastName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
-                姓名: <span class="highATT">{{firstName + " " + lastName}}</span><br>
+                姓名: <span class="highATT">{ {firstName + " " + lastName} }</span><br>
                 <br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp',
                 []);<br>app.controller('myCtrl', function($scope) {<br>&nbsp;&nbsp;&nbsp; $scope.firstName
                 = "John";<br>&nbsp;&nbsp;&nbsp; $scope.lastName = "Doe";<br>});<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
@@ -56,7 +56,7 @@
                 名: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"firstName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
                 姓: <span class="highLT">&lt;</span><span class="highELE">input</span> <span class="highATT">type=</span><span class="highVAL">"text"</span> <span class="highATT">ng-model=</span><span class="highVAL">"lastName"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
                 <span class="highLT">&lt;</span><span class="highELE">br</span><span class="highGT">&gt;</span><br>
-                姓名: <span class="highATT">{{fullName()}}</span><br><br>
+                姓名: <span class="highATT">{ {fullName()} }</span><br><br>
                 <span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br>
                 <span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp', []);<br>app.controller('personCtrl',
                 function($scope) {<br>
@@ -103,7 +103,7 @@
                 <span class="highLT">&lt;</span><span class="highELE">ul</span><span class="highGT">&gt;</span><br>
                 &nbsp;
                 <span class="highLT">&lt;</span><span class="highELE">li</span> <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br>
-                &nbsp;&nbsp;&nbsp; <span class="highATT">{{ x.name + ', ' + x.country }}</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/li</span><span class="highGT">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp; <span class="highATT">{ { x.name + ', ' + x.country } }</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/li</span><span class="highGT">&gt;</span><br>
                 <span class="highLT">&lt;</span><span class="highELE">/ul</span><span class="highGT">&gt;</span><br><br>
                 <span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br>
                 <span class="highLT">&lt;</span><span class="highELE">script</span> <span class="highATT">src=</span><span class="highVAL">"namesController.js"</span><span class="highGT">&gt;</span><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>

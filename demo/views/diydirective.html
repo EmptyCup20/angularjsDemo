@@ -1,0 +1,290 @@
+<div class="article-body">
+    <div class="article-intro" id="content">
+        <h1>AngularJS <span class="color_h1">自定义指令</span>
+        </h1>
+        <hr>
+        <p class="intro">AngularJS 应用的模块中有很多方法可以使用，其中 <strong>directive()</strong> 这个方法是用来定义指令的</p>
+        <hr>
+        <p>directive()方法可以接受两个参数。</p>
+        <p><strong>name</strong>：字符串</p>
+        <p><strong>factory_function</strong>：函数</p>
+        <p><strong>directive</strong>的工厂函数会行会一个定义了指令的全部行为。$compile服务利用这个方法返回的对象，在DOM调用指令时来构造指令的行为。
+            <br>当<strong>AngularJS</strong>启动应用时，它会把第一个参数当做一个字符串，并以此字符串未名来注册第二个参数返回的对象。AngularJS编译器会解析主HTML的DOM中的元素、属性、注释和CSS类名中使用了这个名字的地方，并在这些地方引用对应的指令。当它找到某个已知的指令时，就会在页面中插入指令所对应的DOM元素。</p>
+        <div class="example">
+            <h2 class="example">AngularJS 指令定义</h2>
+            <div class="example_code notranslate htmlHigh">
+                <pre>
+    angular.module('myApp',[])
+    .directive('myDirective',function(){
+    //指令定义放在这里
+        return{
+            //通过设置项来定义指令，没在这里进行覆写
+        }
+    });</pre>
+            </div>
+        </div>
+        <p>
+        </p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        为了避免与未来的HTML标准冲突，给自定义的指令加入前缀来代表自定义的命名空间。AngularJS本身已经使用了ng-前缀，所以可以选择除此以外的名字。在例子中我们使用my-前缀（比如my-derictive）
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>指令参数</h2>
+        <p>下面，来看看定义一个指令时可以使用的全部设置选项。</p>
+        <div class="example">
+            <h2 class="example">指令具体参数</h2>
+            <div class="example_code notranslate htmlHigh">
+                <pre>
+directive('',function(){
+Runs during compile
+return {
+    priority: 1,
+    terminal: true,
+    template: '',
+    restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+    scope: {}, // {} = isolate, true = child, false/undefined = no change
+    templateUrl: '',
+    replace: true,
+    transclude: true,
+    controller: function($scope, $element, $attrs, $transclude) {},
+    require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+    compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+    link: function($scope, iElm, iAttrs, controller) {}
+};
+});</pre>
+            </div>
+        </div>
+        <hr>
+        <h2>priority 参数</h2>
+        <p><strong>priority</strong> 参数定义了该指令的优先级，默认值为<strong>0</strong>。</p>
+        <p>大多数指令会忽略这个参数，但也有些场景设置改优先级是非常重要的甚至是必须的。例如，ngRepeat将这个参数设置为1000，这样可以保证在同一元素上他，它总是在其他指令之前被调用。如果一个元素上具有两个优先级相同的指令，声明在前面的那个会被优先调用。如果其中一个的优先级更高，则不管声明的顺序如何都会被优先调用：具有更高优先级的指令总是优先运行。</p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        ngRepeat是所有内置指令中优先级最高的，它总是在其他指令之前运行。这样设置主要考虑的是性能。
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>terminal 参数</h2>
+        <p><strong>terminal</strong> 参数用来告诉AngularJS停止运行当前元素上比本指令优先级低的指令。但同当前指令优先级相同的指令还是会被执行。</p>
+        <p>如果元素上某个指令设置了terminal参数并具有较高的优先级，就不要再用其他低优先级的指令对其进行修饰了，因为不会被调用。但是具有相同优先级的指令还是会被继续调用。</p>
+        <p>使用了terminal参数的例子是ngView和ngIf。ngIf的优先级略高于ngView，如果ngIf的表达式值为true，ngView就可以被正常执行，但如果ngIf表达式的值为false，由于ngView的优先级较低就不会被执行。</p>
+        <hr>
+        <h2>restrict 参数</h2>
+        <p><strong>restrict</strong> 是一个可选的参数。它告诉AngularJS这个指令在DOM中可以何种形式被声明。默认AngularJS认为restrict的值是A，即以属性的形式来进行声明。</p>
+        <pre>
+    E(元素)
+    &lt;my-directive&gt; &lt;/my-directive&gt;    
+    A(属性，默认值)
+    &lt;div my-directive&gt;&lt;/div&gt;
+    C(类名)
+    &lt;div class="my-directive"&gt;&lt;/div&gt;
+    M(注释)
+    &lt;!-- directive:my-directive --&gt;
+</pre>
+        <p>属性是用来声明指令最常用的方式，因为它能在包括老版本的IE浏览器在内的所有浏览器中正常工作，并且不需要在文档头部注册新的标签。</p>
+        <table class="lamp">
+            <tbody>
+                <tr>
+                    <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px">
+                    </th>
+                    <td>
+                        尽量避免用注释方式来声明属性。这种方式最初被用来声明由多个标签组成的指令。
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>template 参数</h2>
+        <p><strong>template</strong> 参数一般是一段html字符串</p>
+        <p>还有一种参数形式是：接受两个参数的函数，参数为tElement和tAttrs，并返回一个代表模板的字符串。</p>
+        <hr>
+        <h2>templateUrl 参数</h2>
+        <p><strong>templateUrl</strong> 参数一般一个代表外部HTML文件路径的字符串</p>
+        <p>还有一种参数形式是：接受两个参数的函数，参数为tElement和tAttrs，并返回一个外部HTML文件路径的字符串。</p>
+        <hr>
+        <h2>replace 参数</h2>
+        <p><strong>replace</strong>是一个可选参数，如果设置了这个参数，值必须为true，因为默认值为false。默认值意味着模板会被当作子元素插入到调用此指令的元素内部</p>
+        <pre>
+&lt;div some-directive&gt;&lt;/div&gt;
+.directive('someDirective', function() {
+    return {
+        template: '&lt;div&gt;some stuff here&lt;div&gt;'
+        };
+});
+调用指令之后
+&lt;div some-directive&gt;
+&lt;div&gt;some stuff here&lt;div&gt;
+&lt;/div&gt;
+</pre>
+        <p>replace为true时</p>
+        <pre>
+.directive('someDirective', function() {
+return {
+    replace: true // 修饰过
+        template: '&lt;div&gt;some stuff here&lt;div&gt;'
+    };
+});
+调用指令之后
+&lt;div&gt;some stuff here&lt;div&gt;
+</pre>
+<hr>
+<h2>transclude 参数</h2>
+<p><strong>transclude</strong>是一个可选的参数。如果设置了，其值必须为<strong>true</strong>，它的默认值是<strong>false</strong>。</p>
+<p>移动一个标识符的原始字节带你到一个新模版的位置<a href="http://docs.angularjs.cn/api/ng/directive/ngTransclude">更详细transclude</a></p>
+<pre>
+&lt;span myDirective&gt;content&lt;/span&gt;
+.directive('myDirective',function(){
+    return {
+        transclude:'true',
+        template:'&lt;div&gt;原来的内容在这里
+            +'&lt;span ng-transclude&gt;&lt;/span&gt;'
+        +&lt;/div&gt;'
+    }
+});
+执行之后
+&lt;div&gt;原来的内容在这里
+&lt;span&gt;content&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<hr>
+<h2>scope 参数</h2>
+<p><strong>scope</strong>参数是可选的，可以被设置为<strong>true</strong>或者一个<strong>对象</strong>，默认值为<strong>false</strong> </p>
+<p>当scope设置为true时，会从父作用域继承并创建一个新的作用域对象。如果一个元素上有多个指令使用了隔离作用域，其中只有一个可以生效。只有指令模板中的根元素可以获得一个新的作用域。因此，对于这些对象来说scope默认被设置为true。内置指令ng-controller的作用，就是从父级作用域继承并创建一个新的子作用域。它会创建一个新的从父作用域继承而来的子作用域。</p>
+<p>我们来看这个例子,控制器需要自己先定义一个</p>
+<div class="example">
+    <h2 class="example">作用域例子1</h2>
+    <div class="example_code notranslate htmlHight">
+<pre>
+&lt;div ng-app="myApp" ng-init="someProperty = 'some data'"&gt;
+    &lt;div ng-init="siblingProperty='moredata'"&gt;
+        Inside Div Two: { { aThirdProperty } }
+        &lt;div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController"&gt;
+            Inside Div Three: { { aThirdProperty } }
+            &lt;div ng-init="aFourthProperty"&gt;
+                Inside Div Four: { { aThirdProperty } }
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <hr/>
+        <div ng-init="someProperty = 'some data'">
+            <div ng-init="siblingProperty='moredata'">
+                Inside Div Two: {{ aThirdProperty }}
+                <div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController">
+                    Inside Div Three: {{ aThirdProperty }}
+                    <div ng-init="aFourthProperty">
+                        Inside Div Four: {{ aThirdProperty }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <p>刷新页面，会发现第二个div中由于<strong>{ { aTgirdProperty } }</strong>未定义，因此什么都没有输出。第三个div显示了设置在继承来的作用域中的<strong>data for a 3rd property</strong>.</p>
+        <p>如果要创建一个能够从外部原型继承作用域的指令，将<strong>scope</strong>属性设置为<strong>true</strong></p>
+        <div class="example">
+            <h2 class="example">作用域例子2</h2>
+            <div class="example_code notranslate htmlHight">
+<pre>
+&lt;div ng-init="someProperty = 'some data'"&gt;&lt;/div&gt;
+&lt;div ng-init="siblingProperty='moredata'"&gt;
+    Inside Div Two: { { aThirdProperty } }
+    &lt;div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController"&gt;
+        Inside Div Three: { { aThirdProperty } }
+        &lt;div ng-controller="SecondController"&gt;
+            Inside Div Four: { { aThirdProperty } }
+            &lt;br&gt; Outside myDirective: { { myProperty } }
+            &lt;div my-directive ng-init="myProperty = 'wow, this is cool'"&gt;
+                Inside myDirective: { { myProperty } }
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                <hr/>
+                <div ng-init="someProperty = 'some data'"></div>
+                <div ng-init="siblingProperty='moredata'">
+                    Inside Div Two: {{ aThirdProperty }}
+                    <div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController">
+                        Inside Div Three: {{ aThirdProperty }}
+                        <div ng-controller="SecondController">
+                            Inside Div Four: {{ aThirdProperty }}
+                            <br> Outside myDirective: {{ myProperty }}
+                            <div my-directive ng-init="myProperty = 'wow, this is cool'">
+                                Inside myDirective: {{ myProperty }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+</div>
+<hr>
+<p>隔离作用域可能是scope属性三个选项中最难理解的一个，但也是最强大的。隔离作用域的概念是以面向对象编程为基础的</p>
+<p>具有隔离作用域的指令最主要的使用场景是创建可复用的组件，组件可以在未知上下文中使用，并且可以避免污染所处的外部作用域或不经意地污染内部作用域。创建具有隔离作用域的指令需要将scope属性设置为一个空对象{}。如果这样做了，指令的模板就无法访问外部作用域</p>
+<div class="example">
+    <h2 class="example">隔离作用域</h2>
+        <div class="example_code notranslate htmlHight">
+<pre>
+&lt;div ng-controller='MainController'&gt;
+    Outside myDirective: { { myProperty } }
+    &lt;div my-directive ng-init="myProperty = 'wow, this is cool'"&gt;
+        Inside myDirective: { { myProperty } }
+    &lt;/div&gt;
+&lt;/div&gt;
+.directive('onedirective', function() {
+    return {
+        restrict: 'A',
+        scope: {},
+        priority: 100,
+        template: '<div>Inside myDirective {{ myProperty }}</div>'
+    };
+});</pre>
+            <hr/>   
+            <div ng-controller='MainController'>
+                Outside myDirective: {{ myProperty }}
+                <div onedirective ng-init="myProperty = 'wow, this is cool'">
+                    Inside myDirective: {{ myProperty }}
+                </div>
+            </div>
+        </div>
+</div>
+<h2>绑定策略</h2>
+<p>
+    为了让新的指令作用域可以访问当前本地作用域中的变量，需要使用下面三种别名中的一种。
+    </p>
+    <p>
+本地作用域属性：使用@符号将本地作用域同DOM属性的值进行绑定。指令内部作用域可以
+使用外部作用域的变量：
+<pre>@ (or @attr)</pre>
+现在，可以在指令中使用绑定的字符串了。
+双向绑定：通过=可以将本地作用域上的属性同父级作用域上的属性进行双向的数据绑定。
+就像普通的数据绑定一样，本地属性会反映出父数据模型中所发生的改变。
+<pre>= (or =attr)</pre>
+父级作用域绑定 通过&符号可以对父级作用域进行绑定，以便在其中运行函数。意味着对这
+个值进行设置时会生成一个指向父级作用域的包装函数。
+要使调用带有一个参数的父方法，我们需要传递一个对象，这个对象的键是参数的名称，值
+是要传递给参数的内容。
+<pre>& (or &attr)</pre>
+</p>
+
+
+
+    </div>
+</div>

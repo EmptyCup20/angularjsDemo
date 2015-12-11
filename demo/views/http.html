@@ -1,0 +1,79 @@
+<div class="article-body">
+
+    <div class="article-intro" id="content">
+
+        <h1>AngularJS <span class="color_h1">XMLHttpRequest</span>
+        </h1>
+        <hr>
+        <p class="intro"><strong>$http</strong> 是 AngularJS 中的一个核心服务，用于读取远程服务器的数据。</p>
+        <hr>
+        <h2>读取 JSON 文件 </h2>
+        <p>以下是存储在web服务器上的 JSON 文件：</p>
+
+        <div class="example">
+            <div class="example_code">
+                [<br>{<br>"Name" : "Alfreds Futterkiste",<br>"City" : "Berlin",<br>
+                "Country" : "Germany"<br>},<br>{<br>"Name" : "Berglunds snabbköp",<br>"City"
+                : "Luleå",<br>"Country" : "Sweden"<br>},<br>{<br>"Name" : "Centro comercial
+                Moctezuma",<br>"City" : "México D.F.",<br>"Country" : "Mexico"<br>},<br>{<br>
+                "Name" : "Ernst Handel",<br>"City" : "Graz",<br>"Country" : "Austria"<br>},<br>
+                {<br>"Name" : "FISSA Fabrica Inter. Salchichas S.A.",<br>"City" : "Madrid",<br>
+                "Country" : "Spain"<br>},<br>{<br>"Name" : "Galería del gastrónomo",<br>
+                "City" : "Barcelona",<br>"Country" : "Spain"<br>},<br>{<br>"Name" : "Island
+                Trading",<br>"City" : "Cowes",<br>"Country" : "UK"<br>},<br>{<br>"Name" : "Königlich
+                Essen",<br>"City" : "Brandenburg",<br>"Country" : "Germany"<br>},<br>{<br>
+                "Name" : "Laughing Bacchus Wine Cellars",<br>"City" : "Vancouver",<br>
+                "Country" : "Canada"<br>},<br>{<br>"Name" : "Magazzini Alimentari Riuniti",<br>
+                "City" : "Bergamo",<br>"Country" : "Italy"<br>},<br>{<br>"Name" :
+                "North/South",<br>"City" : "London",<br>"Country" : "UK"<br>},<br>{<br>
+                "Name" : "Paris spécialités",<br>"City" : "Paris",<br>"Country" : "France"<br>
+                },<br>{<br>"Name" : "Rattlesnake Canyon Grocery",<br>"City" : "Albuquerque",<br>
+                "Country" : "USA"<br>},<br>{<br>"Name" : "Simons bistro",<br>"City" : "København",<br>
+                "Country" : "Denmark"<br>},<br>{<br>"Name" : "The Big Cheese",<br>"City" :
+                "Portland",<br>"Country" : "USA"<br>},<br>{<br>"Name" : "Vaffeljernet",<br>
+                "City" : "Århus",<br>"Country" : "Denmark"<br>},<br>{<br>"Name" : "Wolski
+                Zajazd",<br>"City" : "Warszawa",<br>"Country" : "Poland"<br>}<br>]<br>
+            </div>
+        </div>
+        <br><hr>
+        <h2>AngularJS $http</h2>
+        <p>AngularJS $http 是一个用于读取web服务器上数据的服务。 </p>
+        <p>$http.get(url) 是用于读取服务器数据的函数。 </p>
+        <div class="example">
+            <h2 class="example">AngularJS 实例</h2>
+            <div class="example_code">
+                <span class="highLT">&lt;</span><span class="highELE">div</span> <span class="highATT">ng-app=</span><span class="highVAL">"myApp"</span> <span class="highATT">ng-controller=</span><span class="highVAL">"customersCtrl"</span><span class="highGT">&gt;</span> <br><br><span class="highLT">&lt;</span><span class="highELE">ul</span><span class="highGT">&gt;</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">li</span>
+                <span class="highATT">ng-repeat=</span><span class="highVAL">"x in names"</span><span class="highGT">&gt;</span><br>&nbsp;&nbsp;&nbsp; <span class="highATT">{{ x.Name + ', ' + x.Country }}</span><br>&nbsp; <span class="highLT">&lt;</span><span class="highELE">/li</span><span class="highGT">&gt;</span><br>
+                <span class="highLT">&lt;</span><span class="highELE">/ul</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">/div</span><span class="highGT">&gt;</span><br><br><span class="highLT">&lt;</span><span class="highELE">script</span><span class="highGT">&gt;</span><br>var app = angular.module('myApp',
+                []);<br>app.controller('customersCtrl',
+                function($scope, $http) {<br>&nbsp;&nbsp;&nbsp; $http.get("http://www.runoob.com/try/angularjs/data/Customers_JSON.php")<br>&nbsp;&nbsp;&nbsp; .success(function(response) {$scope.names
+                = response.records;});<br>});<br><span class="highLT">&lt;</span><span class="highELE">/script</span><span class="highGT">&gt;</span>
+            </div>
+            <br><div ng-controller="customersCtrl">
+            <ul>
+            <li ng-repeat="x in names">
+                {{ x.Name + ', ' + x.Country }}
+            </li>
+        </ul>
+        </div>
+        </div>
+        <p><strong>应用解析:</strong></p>
+        <p>注意：以上代码的 get 请求是本站的服务器，你不能直接拷贝到你本地运行，会存在跨域问题，解决办法就是将 Customers_JSON.php 的数据拷贝到你自己的服务器上，附：<a href="http://www.runoob.com/w3cnote/php-ajax-cross-border.html" target="_blank">PHP Ajax 跨域问题最佳解决方案</a>。</p>
+        <p> AngularJS 应用通过 <strong>ng-app</strong> 定义。应用在 &lt;div&gt; 中执行。</p>
+        <p> <strong>ng-controller</strong> 指令设置了 <strong>controller
+            对象</strong> 名。</p>
+        <p>函数 <strong>customersController</strong> 是一个标准的 JavaScript <strong>
+            对象构造器</strong>。</p>
+        <p>控制器对象有一个属性: <strong>$scope.names</strong>。</p>
+        <p><strong>$http.get()</strong> 从web服务器上读取静态  <strong>JSON 数据</strong>。 </p>
+        </p>
+        <p>当从服务端载入 JSON 数据时，<strong>$scope.names</strong> 变为一个数组。</p>
+        <p>
+        </p>
+        <table class="lamp"><tbody><tr>
+            <th style="width:34px"><img src="styles/assets/img/lamp.jpg" alt="Note" style="height:32px;width:32px"></th>
+            <td>以上代码也可以用于读取数据库数据。</td>
+        </tr></tbody></table>
+
+    </div>
+</div>

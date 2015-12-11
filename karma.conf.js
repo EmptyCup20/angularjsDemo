@@ -1,11 +1,11 @@
 // Karma configuration
-// Generated on Fri Dec 04 2015 10:53:49 GMT+0800 (中国标准时间)
+// Generated on Mon Oct 12 2015 16:31:22 GMT+0800 (中国标准时间)
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '..',
+    basePath: '',
 
 
     // frameworks to use
@@ -15,13 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-route/angular-route.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'demo/scripts/**/*.js',
-      'demo/scripts/controllers/**/*.js',
-      'test/unit/controllers/**/*.js',
-      'test/unit/**/*.js'
     ],
 
 
